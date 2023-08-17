@@ -13,7 +13,6 @@ typedef enum {
     TD_SINGLE_HOLD,
     TD_DOUBLE_TAP,
     TD_DOUBLE_HOLD,
-    TD_DOUBLE_SINGLE_TAP, // Send two single taps
     TD_TRIPLE_TAP,
     TD_TRIPLE_HOLD
 } td_state_t;
@@ -77,17 +76,12 @@ td_state_t cur_dance(tap_dance_state_t *state) {
 
         return TD_SINGLE_TAP;
     } else if (state->count == 2) {
-        // TD_DOUBLE_SINGLE_TAP is to distinguish between typing "pepper", and actually wanting a double tap
-        // action when hitting 'pp'. Suggested use case for this return value is when you want to send two
-        // keystrokes of the key, and not the 'double tap' action/macro.
-        if (state->interrupted) return TD_DOUBLE_SINGLE_TAP;
-        else if (state->pressed) return TD_DOUBLE_HOLD;
-        else return TD_DOUBLE_TAP;
+        if (state->pressed)
+            return TD_DOUBLE_HOLD;
+
+        return TD_DOUBLE_TAP;
     }
 
-    // Assumes no one is trying to type the same letter three times (at least not quickly).
-    // If your tap dance key is 'KC_W', and you want to type "www." quickly - then you will need to add
-    // an exception here to return a 'TD_TRIPLE_SINGLE_TAP', and define that enum just like 'TD_DOUBLE_SINGLE_TAP'
     if (state->count == 3) {
         if (state->interrupted || !state->pressed) return TD_TRIPLE_TAP;
         else return TD_TRIPLE_HOLD;
@@ -122,14 +116,6 @@ void l_finished(tap_dance_state_t *state, void *user_data) {
             layer_off(_BASE);
             layer_off(_NAV);
             layer_on(_SYM);
-            break;
-        // Last case is for fast typing. Assuming your key is `f`:
-        // For example, when typing the word `buffer`, and you want to make sure that you send `ff` and not `Esc`.
-        // In order to type `ff` when typing fast, the next character will have to be hit within the `TAPPING_TERM`, which by default is 200ms.
-        case TD_DOUBLE_SINGLE_TAP:
-            layer_off(_BASE);
-            layer_on(_NAV);
-            layer_off(_SYM);
             break;
         default: break;
     }
