@@ -62,9 +62,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_SYM] = LAYOUT(
         //+------------------------------------------------------------------------+       +-----------------------------------------------------------------------------------+
-        /**/ KC_GRAVE    , KC_TRNS     , KC_TRNS     , KC_TRNS          , QK_BOOT,/*       */ KC_TRNS    , KC_LEFT_BRACKET     , KC_RIGHT_BRACKET  , KC_MINUS   , KC_EQUAL, /**/
-        /**/ KC_ESC      , KC_TAB      , KC_TRNS     , KC_TRNS          , KC_TRNS,/*       */ KC_TRNS    , KC_LPRN             , KC_RPRN           , KC_UNDS    , KC_QUOTE, /**/
-        /**/ KC_LSFT     , KC_TRNS     , KC_TRNS     , KC_TRNS          , KC_TRNS,/*       */ KC_TRNS    , KC_TRNS             , KC_TRNS           , KC_TRNS    , KC_RSFT , /**/
+        /**/ KC_F1       , KC_F2       , KC_F3       , KC_F4            ,   KC_F5,/*       */ KC_F6      , KC_F7               , KC_F8             , KC_F9      , KC_F10,   /**/
+        /**/ KC_ESC      , KC_TAB      , KC_TRNS     , KC_TRNS          , KC_TRNS,/*       */ KC_MINUS   , KC_LPRN             , KC_RPRN           , KC_EQUAL   , KC_QUOTE, /**/
+        /**/ KC_LSFT     , KC_TRNS     , KC_TRNS     , KC_TRNS          , KC_TRNS,/*       */ KC_UNDS    , KC_LEFT_BRACKET     , KC_RIGHT_BRACKET  , KC_TRNS    , KC_RSFT , /**/
         /*------------------------------------------*/ TD(L_TAP)        , KC_SPC ,/*       */ KC_ENT     , KC_BSPC         /*-------------------------------------------------*/
                                                     /*----------------------------*/       /*-----------------------------*/
     )
@@ -150,3 +150,6 @@ void l_reset(tap_dance_state_t *state, void *user_data) {
     }
     ltap_state.state = TD_NONE;
 }
+
+
+
