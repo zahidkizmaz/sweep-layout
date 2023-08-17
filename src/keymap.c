@@ -72,9 +72,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 td_state_t cur_dance(tap_dance_state_t *state) {
     if (state->count == 1) {
-        if (state->interrupted || !state->pressed) return TD_SINGLE_TAP;
-        // Key has not been interrupted, but the key is still held. Means you want to send a 'HOLD'.
-        else return TD_SINGLE_HOLD;
+        if (state->pressed)
+            return TD_SINGLE_HOLD;
+
+        return TD_SINGLE_TAP;
     } else if (state->count == 2) {
         // TD_DOUBLE_SINGLE_TAP is to distinguish between typing "pepper", and actually wanting a double tap
         // action when hitting 'pp'. Suggested use case for this return value is when you want to send two
@@ -150,6 +151,3 @@ void l_reset(tap_dance_state_t *state, void *user_data) {
     }
     ltap_state.state = TD_NONE;
 }
-
-
-
