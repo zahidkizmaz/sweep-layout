@@ -9,6 +9,7 @@ Sweep keyboard is a 34-key split keyboard.
 - Layer 1 Base
 - Layer 2 Numbers & Navigation
 - Layer 3 Symbols
+- Layer 4 Board control
 
 ## How to use
 
