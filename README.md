@@ -2,9 +2,9 @@
 
 My [ferris/sweep](https://github.com/davidphilipbarr/sweep) keyboard QMK layout.
 
-Sweep keyboard is a 34-key split keyboard.
-
 ## Layers
+
+Sweep keyboard is a 34-key split keyboard. That is why we need multiple layers:
 
 - Layer 1 Base
 - Layer 2 Numbers & Navigation
@@ -13,13 +13,31 @@ Sweep keyboard is a 34-key split keyboard.
 
 ## How to use
 
-#### Requirements:
+### Requirements:
 
-Install qmk.
+#### Install
 
-```
+- [QMK](https://docs.qmk.fm/#/newbs_getting_started)
+- [Just (Optional)](https://github.com/casey/just)
+
+### Setup
+
+##### Clone the repository
+
+```sh
 git clone https://github.com/zahidkizmaz/sweep-layout.git
+```
 
+##### With just
+
+```sh
+just create-env
+just setup
+```
+
+##### Without just
+
+```sh
 # get your qmk home dir
 qmk env  # this command will output your qmk env variables including the QMK_HOME
 
