@@ -19,13 +19,13 @@ typedef enum {
 } td_state_t;
 
 typedef struct {
-    bool is_press_action;
     td_state_t state;
 } td_tap_t;
 
 // Tap dance enums
 enum {
     L_TAP,
+    DOT_TAP,
 };
 
 td_state_t cur_dance(tap_dance_state_t *state);
@@ -34,8 +34,12 @@ td_state_t cur_dance(tap_dance_state_t *state);
 void l_finished(tap_dance_state_t *state, void *user_data);
 void l_reset(tap_dance_state_t *state, void *user_data);
 
+void dot_finished(tap_dance_state_t *state, void *user_data);
+void dot_reset(tap_dance_state_t *state, void *user_data);
+
 tap_dance_action_t tap_dance_actions[] = {
-    [L_TAP] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, l_finished, l_reset)
+    [L_TAP] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, l_finished, l_reset),
+    [DOT_TAP] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dot_finished, dot_reset),
 };
 
 
@@ -43,18 +47,18 @@ tap_dance_action_t tap_dance_actions[] = {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT(
-        //+------------------------------------------------------------------------------------------+              +----------------------------------------------------------------------------------+/
-        /**/ KC_Q        , KC_W        , KC_E          , KC_R                      , KC_T          ,/*              */ KC_Y              , KC_U           , KC_I           , KC_O        , KC_P    , /**/
-        /**/ KC_A        , KC_S        , KC_D          , KC_F                      , KC_G          ,/*              */ KC_H              , KC_J           , KC_K           , KC_L        , KC_SCLN , /**/
-        /**/ LSFT_T(KC_Z), KC_X        , LCTL_T(KC_C)  , LGUI_T(KC_V)              , LALT_T(KC_B)  ,/*              */ RALT_T(KC_N)      , RGUI_T(KC_M)   , RCTL_T(KC_COMM), KC_DOT      , RSFT_T(KC_SLSH) , /**/
-        /*------------------------------------------*/   TD(L_TAP)                 , KC_SPC        ,/*              */ KC_ENT            , KC_BSPC        /*-------------------------------------------*/
-                                                    /*----------------------------------------------*/              /*----------------------------------*/
+        //+------------------------------------------------------------------------------------------+          +-----------------------------------------------------------------------------------------+/
+        /**/ KC_Q        , KC_W        , KC_E          , KC_R                      , KC_T          ,/*          */ KC_Y              , KC_U           , KC_I           , KC_O        , KC_P            ,/**/
+        /**/ KC_A        , KC_S        , KC_D          , KC_F                      , KC_G          ,/*          */ KC_H              , KC_J           , KC_K           , KC_L        , KC_SCLN         ,/**/
+        /**/ LSFT_T(KC_Z), KC_X        , LCTL_T(KC_C)  , LGUI_T(KC_V)              , LALT_T(KC_B)  ,/*          */ RALT_T(KC_N)      , RGUI_T(KC_M)   , RCTL_T(KC_COMM), TD(DOT_TAP) , RSFT_T(KC_SLSH) ,/**/
+        /*------------------------------------------*/   TD(L_TAP)                 , KC_SPC        ,/*          */ KC_ENT            , KC_BSPC        /*--------------------------------------------------*/
+                                                    /*----------------------------------------------*/          /*----------------------------------*/
     ),
 
     [_NAV] = LAYOUT(
         //+--------------------------------------------------------------------------------------------------------------------------------+          +----------------------------------------------------------------------------------+/
         /**/ KC_1              , KC_2          , KC_3                         , KC_4                       , KC_5                        ,/*          */ KC_6              , KC_7           , KC_8           , KC_9        , KC_0    , /**/
-        /**/ KC_ESC            , KC_TAB        , KC_AUDIO_VOL_DOWN            , KC_AUDIO_VOL_UP            , KC_AUDIO_MUTE               ,/*          */ KC_LEFT           , KC_DOWN        , KC_UP          , KC_RGHT     , KC_NO , /**/
+        /**/ KC_ESC            , KC_TAB        , KC_AUDIO_VOL_DOWN            , KC_AUDIO_VOL_UP            , KC_AUDIO_MUTE               ,/*          */ KC_LEFT           , KC_DOWN        , KC_UP          , KC_RGHT     , KC_NO   , /**/
         /**/ KC_LSFT           , TO(_BOARD)    , LCTL_T(KC_MEDIA_PREV_TRACK)  , LGUI_T(KC_MEDIA_PLAY_PAUSE), LALT_T(KC_MEDIA_NEXT_TRACK) ,/*          */ KC_RIGHT_ALT      , KC_RIGHT_GUI   , KC_RIGHT_CTRL  , TO(_BOARD)  , KC_RSFT , /**/
         /*-----------------------------------------------------------------*/   TD(L_TAP)                  , KC_SPC                      ,/*          */ KC_ENT            , KC_BSPC        /*-------------------------------------------*/
                                                                             /*-------------------------------------------------------------*/         /*----------------------------------*/
@@ -100,7 +104,9 @@ td_state_t cur_dance(tap_dance_state_t *state) {
 
 // Create an instance of 'td_tap_t' for the 'l' tap dance.
 static td_tap_t ltap_state = {
-    .is_press_action = true,
+    .state = TD_NONE
+};
+static td_tap_t dottap_state = {
     .state = TD_NONE
 };
 
@@ -108,23 +114,19 @@ void l_finished(tap_dance_state_t *state, void *user_data) {
     ltap_state.state = cur_dance(state);
     switch (ltap_state.state) {
         case TD_SINGLE_TAP:
+            layer_clear();
             layer_on(_BASE);
-            layer_off(_NAV);
-            layer_off(_SYM);
             break;
         case TD_SINGLE_HOLD:
-            layer_off(_BASE);
-            layer_off(_NAV);
+            layer_clear();
             layer_on(_SYM);
             break;
         case TD_DOUBLE_TAP:
-            layer_off(_BASE);
+            layer_clear();
             layer_on(_NAV);
-            layer_off(_SYM);
             break;
         case TD_DOUBLE_HOLD:
-            layer_off(_BASE);
-            layer_off(_NAV);
+            layer_clear();
             layer_on(_SYM);
             break;
         default: break;
@@ -134,16 +136,51 @@ void l_finished(tap_dance_state_t *state, void *user_data) {
 void l_reset(tap_dance_state_t *state, void *user_data) {
     switch (ltap_state.state) {
         case TD_SINGLE_HOLD:
+            layer_clear();
             layer_on(_BASE);
-            layer_off(_NAV);
-            layer_off(_SYM);
             break;
         case TD_DOUBLE_HOLD:
+            layer_clear();
             layer_on(_BASE);
-            layer_off(_NAV);
-            layer_off(_SYM);
             break;
         default: break;
     }
     ltap_state.state = TD_NONE;
+}
+
+void dot_finished(tap_dance_state_t *state, void *user_data) {
+    dottap_state.state = cur_dance(state);
+    switch (dottap_state.state) {
+        case TD_SINGLE_TAP:
+            register_code(KC_DOT);
+            break;
+        case TD_SINGLE_HOLD:
+            register_code(KC_DOT);
+            break;
+        case TD_DOUBLE_TAP:
+            tap_code(KC_DOT);
+            register_code(KC_DOT);
+            break;
+        case TD_DOUBLE_HOLD:
+            layer_clear();
+            layer_on(_NAV);
+            break;
+        default: break;
+    }
+}
+
+void dot_reset(tap_dance_state_t *state, void *user_data) {
+    switch (dottap_state.state) {
+        case TD_SINGLE_TAP:
+            unregister_code(KC_DOT);
+            break;
+        case TD_SINGLE_HOLD:
+            unregister_code(KC_DOT);
+            break;
+        case TD_DOUBLE_TAP:
+            unregister_code(KC_DOT);
+            break;
+        default: break;
+    }
+    dottap_state.state = TD_NONE;
 }
