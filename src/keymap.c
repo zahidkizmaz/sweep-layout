@@ -56,12 +56,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_NAV] = LAYOUT(
-        //+--------------------------------------------------------------------------------------------------------------------------------+   +--------------------------------------------------------------------------------+/
-        /**/ KC_1       , KC_2          , KC_3                               , KC_4                         , KC_5                        ,/*  */ KC_6          , KC_7           , KC_8           , KC_9        , KC_0       ,/**/
-        /**/ KC_ESC     , KC_TAB        , KC_AUDIO_VOL_DOWN                  , KC_AUDIO_VOL_UP              , KC_AUDIO_MUTE               ,/*  */ KC_LEFT       , KC_DOWN        , KC_UP          , KC_RGHT     , RCTL(KC_A) ,/**/
-        /**/ KC_LSFT    , TO(_BOARD)    , LCTL_T(KC_MEDIA_PREV_TRACK)        , LGUI_T(KC_MEDIA_PLAY_PAUSE)  , LALT_T(KC_MEDIA_NEXT_TRACK) ,/*  */ KC_RIGHT_ALT  , KC_RIGHT_GUI   , KC_RIGHT_CTRL  , TO(_BOARD)  , KC_RSFT    ,/**/
-        /*-----------------------------------------------------------------*/  TD(L_TAP)                    , KC_SPC                      ,/*  */ KC_ENT        , KC_BSPC           /*------------------------------------------*/
-                                                                            /*-------------------------------------------------------------*/  /*----------------------------------*/
+        //+------------------------------------------------------------------------------------------------------+   +--------------------------------------------------------------------------------+/
+        /**/ KC_1       , KC_2          , KC_3                   , KC_4                    , KC_5              ,/*   */ KC_6          , KC_7           , KC_8           , KC_9        , KC_0       ,/**/
+        /**/ KC_ESC     , KC_TAB        , KC_AUDIO_VOL_DOWN      , KC_AUDIO_VOL_UP         , KC_AUDIO_MUTE     ,/*   */ KC_LEFT       , KC_DOWN        , KC_UP          , KC_RGHT     , RCTL(KC_A) ,/**/
+        /**/ KC_LSFT    , TO(_BOARD)    , LCTL_T(KC_MPRV)        , LGUI_T(KC_MPLY)         , LALT_T(KC_MNXT)   ,/*   */ KC_RIGHT_ALT  , KC_RIGHT_GUI   , KC_RIGHT_CTRL  , TO(_BOARD)  , KC_RSFT    ,/**/
+        /*-----------------------------------------------------*/  TD(L_TAP)               , KC_SPC            ,/*   */ KC_ENT        , KC_BSPC           /*------------------------------------------*/
+                                                                /*----------------------------------------------*/   /*----------------------------------*/
     ),
 
     [_SYM] = LAYOUT(
