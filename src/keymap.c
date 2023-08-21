@@ -75,9 +75,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_BOARD] = LAYOUT(
         //+------------------------------------------------------------------------+       +------------------------------------------------------------------------+
-        /**/ KC_NO       , KC_NO       , KC_NO       , KC_NO       , QK_BOOT     ,/*       */ QK_BOOT     , KC_NO       , KC_NO       , KC_NO       , KC_NO     ,/**/
+        /**/ KC_F1       , KC_F2       , KC_F3       , KC_F4       , KC_F5       ,/*       */ KC_F6       , KC_F7       , KC_F8       , KC_F9       , KC_F10     ,/**/
         /**/ KC_NO       , KC_NO       , KC_BTN3     , KC_BTN1     , KC_BTN2     ,/*       */ KC_MS_L     , KC_MS_D     , KC_MS_U     , KC_MS_R     , KC_NO     ,/**/
-        /**/ KC_NO       , KC_NO       , KC_NO       , KC_NO       , KC_NO       ,/*       */ KC_WH_L     , KC_WH_U     , KC_WH_D     , KC_WH_R     , KC_NO     ,/**/
+        /**/ QK_BOOT     , KC_NO       , KC_NO       , KC_NO       , KC_SLEP     ,/*       */ KC_WH_L     , KC_WH_U     , KC_WH_D     , KC_WH_R     , QK_BOOT   ,/**/
         /*------------------------------------------*/ TD(L_TAP)   , KC_NO       ,/*       */ KC_NO       , TD(L_TAP)     /*---------------------------------------*/
                                                     /*----------------------------*/       /*----------------------------*/
     )
