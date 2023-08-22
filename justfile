@@ -1,5 +1,8 @@
 set dotenv-load
 
+alias c := compile
+alias f := flash
+
 layout_name := env_var_or_default('LAYOUT_NAME', 'zahid')
 
 # List commands
