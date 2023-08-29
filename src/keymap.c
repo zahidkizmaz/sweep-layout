@@ -47,12 +47,12 @@ tap_dance_action_t tap_dance_actions[] = {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT(
-        //+------------------------------------------------------------------------------------------+          +-----------------------------------------------------------------------------------------+/
-        /**/ KC_Q        , KC_W        , KC_E          , KC_R                      , KC_T          ,/*          */ KC_Y              , KC_U           , KC_I           , KC_O        , KC_P            ,/**/
-        /**/ KC_A        , KC_S        , KC_D          , KC_F                      , KC_G          ,/*          */ KC_H              , KC_J           , KC_K           , KC_L        , KC_SCLN         ,/**/
-        /**/ LSFT_T(KC_Z), KC_X        , LCTL_T(KC_C)  , LGUI_T(KC_V)              , LALT_T(KC_B)  ,/*          */ RALT_T(KC_N)      , RGUI_T(KC_M)   , RCTL_T(KC_COMM), TD(DOT_TAP) , RSFT_T(KC_SLSH) ,/**/
-        /*------------------------------------------*/   TD(L_TAP)                 , KC_SPC        ,/*          */ KC_ENT            , KC_BSPC        /*--------------------------------------------------*/
-                                                    /*----------------------------------------------*/          /*----------------------------------*/
+        //+----------------------------------------------------------------------------------+          +-----------------------------------------------------------------------------------------+/
+        /**/ KC_Q        , KC_W        , KC_E          , KC_R              , KC_T          ,/*          */ KC_Y              , KC_U           , KC_I           , KC_O        , KC_P            ,/**/
+        /**/ KC_A        , KC_S        , KC_D          , KC_F              , KC_G          ,/*          */ KC_H              , KC_J           , KC_K           , KC_L        , KC_SCLN         ,/**/
+        /**/ LSFT_T(KC_Z), KC_X        , LCTL_T(KC_C)  , LGUI_T(KC_V)      , LALT_T(KC_B)  ,/*          */ RALT_T(KC_N)      , RGUI_T(KC_M)   , RCTL_T(KC_COMM), TD(DOT_TAP) , RSFT_T(KC_SLSH) ,/**/
+        /*------------------------------------------*/   TD(L_TAP)         , KC_SPC        ,/*          */ KC_ENT            , KC_BSPC        /*--------------------------------------------------*/
+                                                    /*--------------------------------------*/          /*----------------------------------*/
     ),
 
     [_NAV] = LAYOUT(
@@ -75,10 +75,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_BOARD] = LAYOUT(
         //+------------------------------------------------------------------------+       +------------------------------------------------------------------------+
-        /**/ KC_F1       , KC_F2       , KC_F3       , KC_F4       , KC_F5       ,/*       */ KC_F6       , KC_F7       , KC_F8       , KC_F9       , KC_F10     ,/**/
-        /**/ KC_NO       , KC_NO       , KC_BTN3     , KC_BTN1     , KC_BTN2     ,/*       */ KC_MS_L     , KC_MS_D     , KC_MS_U     , KC_MS_R     , KC_NO     ,/**/
-        /**/ QK_BOOT     , KC_NO       , KC_NO       , KC_NO       , KC_SLEP     ,/*       */ KC_WH_L     , KC_WH_U     , KC_WH_D     , KC_WH_R     , QK_BOOT   ,/**/
-        /*------------------------------------------*/ TD(L_TAP)   , KC_NO       ,/*       */ KC_NO       , TD(L_TAP)     /*---------------------------------------*/
+        /**/ KC_F1       , KC_F2       , KC_F3       , KC_F4          , KC_F5    ,/*       */ KC_F6       , KC_F7       , KC_F8       , KC_F9       , KC_F10    ,/**/
+        /**/ KC_NO       , KC_NO       , KC_BTN3     , KC_BTN1        , KC_BTN2  ,/*       */ KC_MS_L     , KC_MS_D     , KC_MS_U     , KC_MS_R     , KC_NO     ,/**/
+        /**/ QK_BOOT     , KC_NO       , KC_NO       , KC_NO          , KC_SLEP  ,/*       */ KC_WH_L     , KC_WH_U     , KC_WH_D     , KC_WH_R     , QK_BOOT   ,/**/
+        /*------------------------------------------*/ TD(L_TAP)      , KC_NO    ,/*       */ KC_NO       , TD(L_TAP)     /*---------------------------------------*/
                                                     /*----------------------------*/       /*----------------------------*/
     )
 };
