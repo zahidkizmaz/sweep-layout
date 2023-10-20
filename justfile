@@ -42,5 +42,8 @@ reset-qmk-keymap-folder:
 stow:
 	stow -vS -t $LAYOUT_PATH src
 
+clean:
+    qmk clean -a
+
 # Create keymap and compile
 setup: create-keymap reset-qmk-keymap-folder stow compile
